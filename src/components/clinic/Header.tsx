@@ -14,7 +14,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <div className="relative h-12 w-12 overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 shadow">
             <Image
-              src="/logo.jpg"
+              src="/Logo.jpg"
               alt="شعار مركز القناص"
               fill
               className="object-contain p-0.5"

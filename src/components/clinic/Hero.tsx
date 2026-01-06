@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { clinicInfo, highlights } from "./data";
+import { clinicInfo} from "./data";
 
 export default function Hero() {
   const telUrl = `tel:${clinicInfo.phoneDisplay}`;
@@ -8,69 +7,45 @@ export default function Hero() {
   )}`;
 
   return (
-    <section className="mx-auto max-w-6xl px-4 pt-12 pb-10 md:pt-16">
+    <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
       <div className="grid gap-8 md:grid-cols-2 items-center">
-        {/* العمود الأول: النص */}
+        {/* Text */}
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs text-white/85">
-            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/85 px-3 py-1 text-xs text-[#1c2035] border border-black/5">
+            <span className="h-2 w-2 rounded-full bg-[#b19566]" />
             استقبال وحجز سريع
           </span>
 
-          <h1 className="mt-4 text-3xl md:text-5xl font-extrabold leading-tight text-white">
+          <h1 className="mt-4 text-3xl md:text-5xl font-extrabold leading-tight text-white drop-shadow">
             ابتسامتك تبدأ من هنا
-            <span className="block text-white/75 text-xl md:text-2xl font-semibold mt-2">
+            <span className="block text-white/85 text-xl md:text-2xl font-semibold mt-2">
               {clinicInfo.name} — {clinicInfo.tagline}
             </span>
           </h1>
 
-          <p className="mt-4 text-white/80 leading-relaxed">
-            صفحة واحدة مرتبة: خدمات العيادة، التواصل، وحجز الموعد عبر واتساب مباشرة.
+          <p className="mt-4 text-white/85 leading-relaxed max-w-xl">
+            عناية متكاملة لطب وزراعة الأسنان بأحدث التقنيات — احجز موعدك بسهولة عبر واتساب.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href="#booking"
-              className="rounded-xl bg-white text-slate-900 px-5 py-3 text-sm font-semibold hover:bg-white/90"
-            >
+            <a href="#booking" className="btn-main">
               احجز الآن
             </a>
 
-            <a
-              href={telUrl}
-              className="rounded-xl border border-white/25 bg-white/10 px-5 py-3 text-sm text-white hover:bg-white/15"
-            >
+            <a href={telUrl} className="btn-outline-main bg-white/85 border-white/60 text-[#1c2035]">
               اتصال: {clinicInfo.phoneDisplay}
             </a>
 
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-xl bg-emerald-500 px-5 py-3 text-sm text-white hover:bg-emerald-600"
-            >
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-main">
               واتساب
             </a>
           </div>
+
+       
         </div>
 
-        {/* العمود الثاني: صورة + مميزات */}
-        <div className="grid gap-4">
-          {/* صورة الهيرو */}
-          <div className="relative h-[320px] md:h-[420px] rounded-3xl overflow-hidden border border-white/20 bg-white/10 backdrop-blur-xl shadow-2xl shadow-blue-500/20">
-            <Image
-              src="/chair.png"
-              alt="كرسي عيادة أسنان"
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-          </div>
-
-
-        </div>
+        {/* Empty column (hero image already in Page background) */}
+        <div className="hidden md:block" />
       </div>
     </section>
   );

@@ -7,54 +7,52 @@ export default function Contact() {
   )}`;
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-4 py-10">
-      <h2 className="text-2xl md:text-3xl font-extrabold text-white">تواصل معنا</h2>
-      <p className="mt-2 text-white/75">الخريطة iframe حالياً وهمية ويمكن استبدالها لاحقاً.</p>
+    <section id="contact" className="mx-auto max-w-6xl px-4 py-12">
+      <h2 className="section-title text-2xl md:text-3xl">تواصل معنا</h2>
+      <p className="section-subtitle mt-2">يمكن استبدال الخريطة لاحقاً برابطك الحقيقي.</p>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-3xl border border-white/20 bg-white/10 backdrop-blur-xl p-6 shadow-lg shadow-blue-500/10">
-          <div className="grid gap-3 text-sm text-white/85">
-            <div className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 p-4">
+      <div className="mt-7 grid gap-6 lg:grid-cols-2">
+        <div className="card p-6">
+          <div className="grid gap-3 text-sm">
+            <div className="flex items-center justify-between rounded-xl bg-[#f1f3fa] p-4 border border-black/5">
               <span>📞 رقم الهاتف</span>
-              <span className="font-semibold">{clinicInfo.phoneDisplay}</span>
+              <span className="font-bold">{clinicInfo.phoneDisplay}</span>
             </div>
-            <div className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 p-4">
+
+            <div className="flex items-center justify-between rounded-xl bg-[#f1f3fa] p-4 border border-black/5">
               <span>💬 واتساب</span>
-              <span className="font-semibold">{clinicInfo.phoneDisplay}</span>
+              <span className="font-bold">{clinicInfo.phoneDisplay}</span>
             </div>
-            <div className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 p-4">
+
+            <div className="flex items-center justify-between rounded-xl bg-[#f1f3fa] p-4 border border-black/5">
               <span>📍 Google Maps</span>
-            <a
+              <a
                 href={clinicInfo.googleMapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="font-semibold underline underline-offset-4 text-white"
-                >
+                className="font-bold underline underline-offset-4 text-primary"
+              >
                 فتح الخريطة
-            </a>
-
+              </a>
             </div>
           </div>
 
           <div className="mt-5 flex gap-2">
-            <a
-              href={telUrl}
-              className="flex-1 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-center text-sm text-white hover:bg-white/15"
-            >
+            <a href={telUrl} className="btn-outline-main flex-1 text-center px-4 py-3 text-sm">
               اتصال
             </a>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex-1 rounded-xl bg-emerald-500 px-4 py-3 text-center text-sm text-white hover:bg-emerald-600"
+              className="btn-main flex-1 text-center px-4 py-3 text-sm"
             >
               واتساب
             </a>
           </div>
         </div>
 
-        <div className="rounded-3xl border border-white/20 bg-white/10 backdrop-blur-xl p-3 shadow-lg shadow-blue-500/10 overflow-hidden">
+        <div className="card p-3 overflow-hidden">
           <iframe
             src={clinicInfo.googleMapsEmbedUrl}
             width="100%"
@@ -62,8 +60,8 @@ export default function Contact() {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
-            title="خريطة (Demo)"
-            className="rounded-2xl border border-white/20 bg-white/10"
+            title="خريطة"
+            className="rounded-2xl border border-black/5 bg-white"
           />
         </div>
       </div>

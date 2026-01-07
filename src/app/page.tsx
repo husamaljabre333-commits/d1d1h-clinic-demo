@@ -17,15 +17,22 @@ export default function Page() {
       <Header />
 
       {/* Hero background like template banner */}
-      <section className="relative">
-        <div
-          className="absolute inset-0 -z-10 bg-cover bg-center"
-          style={{ backgroundImage: "url('/chair.png')" }}
-        />
-        <div className="absolute inset-0 -z-10 bg-black/20" />
+{/* Hero مع صورة chair.png */}
+<section className="relative min-h-[70vh]">
+  <div
+    className="absolute inset-0 -z-10 bg-cover bg-center"
+    style={{ backgroundImage: "url('/chair.png')" }}
+  />
 
-        <Hero />
-      </section>
+  {/* ✅ تعتيم + تدرج حتى يصير النص واضح بدون مربع */}
+  <div className="absolute inset-0 -z-10 bg-black/55" />
+  <div className="absolute inset-0 -z-10 bg-gradient-to-l from-black/55 via-black/20 to-transparent" />
+
+  <div className="relative z-10 text-white">
+    <Hero />
+  </div>
+</section>
+
 
       {/* باقي الصفحة (Light like template) */}
       <Services />

@@ -19,18 +19,21 @@ const [age, setAge] = useState("");
     const cleanPhone = phone.trim();
     const cleanService = service.trim();
     const cleanNote = note.trim();
+const cleanAge = age.trim();
 
     if (!cleanName || !cleanPhone || !cleanService) {
       alert("رجاءً أدخل الاسم ورقم الهاتف واختر الخدمة.");
       return;
     }
 
-    const msg =
-      `مرحباً، أود حجز موعد في ${clinicInfo.name}.\n\n` +
-      `الاسم: ${cleanName}\n` +
-      `رقم الهاتف: ${cleanPhone}\n` +
-      `الخدمة: ${cleanService}\n` +
-      (cleanNote ? `ملاحظة: ${cleanNote}\n` : "");
+const msg =
+  `مرحباً، أود حجز موعد في ${clinicInfo.name}.\n\n` +
+  `الاسم: ${cleanName}\n` +
+  `رقم الهاتف: ${cleanPhone}\n` +
+  (cleanAge ? `العمر: ${cleanAge}\n` : "") +
+  `الخدمة: ${cleanService}\n` +
+  (cleanNote ? `ملاحظة: ${cleanNote}\n` : "");
+
 
     const whatsappUrl = `https://wa.me/${clinicInfo.phoneE164}?text=${encodeURIComponent(
       msg
@@ -110,9 +113,20 @@ const [age, setAge] = useState("");
               />
             </div>
 
-            <button type="submit" className="btn-main w-fit">
-              إرسال على واتساب
-            </button>
+<button
+  type="submit"
+  className="
+    btn-life
+    w-fit
+    rounded-full px-6 py-3 font-semibold transition
+    bg-gradient-to-l from-emerald-500 via-emerald-500 to-emerald-600
+    text-white border border-emerald-300/30
+    hover:from-emerald-600 hover:to-emerald-700
+  "
+>
+  <span>إرسال على واتساب</span>
+</button>
+
 
             <div className="text-xs text-[#1c2035]/70">
               أو اتصل مباشرة:{" "}

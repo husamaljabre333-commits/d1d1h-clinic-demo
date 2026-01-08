@@ -18,7 +18,7 @@ export default function Hero() {
           title="Facebook"
           className="h-10 w-10 rounded-full bg-white/90 border border-black/10 backdrop-blur flex items-center justify-center hover:bg-white transition"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5 fill-[#1c2035]">
+<svg viewBox="0 0 24 24" className="h-5 w-5 fill-[#1877F2]">
             <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.56V12h2.76l-.44 2.89h-2.32v6.99A10 10 0 0 0 22 12z" />
           </svg>
         </a>
@@ -31,7 +31,7 @@ export default function Hero() {
           title="Instagram"
           className="h-10 w-10 rounded-full bg-white/90 border border-black/10 backdrop-blur flex items-center justify-center hover:bg-white transition"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5 fill-[#1c2035]">
+<svg viewBox="0 0 24 24" className="h-5 w-5 fill-[#E4405F]">
             <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm4.8-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
           </svg>
         </a>
@@ -44,7 +44,7 @@ export default function Hero() {
           title="Google Maps"
           className="h-10 w-10 rounded-full bg-white/90 border border-black/10 backdrop-blur flex items-center justify-center hover:bg-white transition"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5 fill-[#1c2035]">
+<svg viewBox="0 0 24 24" className="h-5 w-5 fill-[#EA4335]">
             <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
           </svg>
         </a>

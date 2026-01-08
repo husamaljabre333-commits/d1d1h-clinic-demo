@@ -122,15 +122,15 @@ a {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 
-/* Doctors marquee */
-@keyframes doctors-scroll-ltr {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0%); }
-}
 
+
+/* Doctors marquee */
+/* Doctors marquee (Drag + Auto JS) */
 .doctors-marquee {
-  overflow: hidden;
   width: 100%;
+  overflow-x: auto;      /* مهم للسحب */
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .doctors-track {
@@ -138,15 +138,21 @@ a {
   flex-wrap: nowrap;
   gap: 20px;
   width: max-content;
-  will-change: transform;
-  animation: doctors-scroll-ltr 26s linear infinite;
   padding: 24px;
+
+  /* مهم: لا أنيميشن CSS هنا لأن الحركة صارت بالـ JS */
+  animation: none !important;
+  transform: none !important;
+  will-change: auto;
+}
+.doctors-marquee::-webkit-scrollbar {
+  display: none;
+}
+.doctors-marquee {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* وقف الحركة على hover عشان تقدر تضغط */
-.doctors-marquee:hover .doctors-track {
-  animation-play-state: paused;
-}
 
 
 /* نبضة ضوء داخل الزر */

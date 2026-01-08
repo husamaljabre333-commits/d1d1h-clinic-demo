@@ -33,9 +33,8 @@ export default function Services() {
                 <div className="grid md:grid-cols-2 items-stretch">
                   {/* ✅ النص (دائمًا RTL وبنفس الترتيب) */}
                   <div
-                    className={`p-6 md:p-10 order-1 ${
-                      reversed ? "md:order-2" : "md:order-1"
-                    }`}
+                    className={`p-6 md:p-10 order-2 ${reversed ? "md:order-2" : "md:order-1"}`}
+
                     dir="rtl"
                   >
                     <h3 className="text-xl md:text-2xl font-extrabold text-[#1c2035]">
@@ -64,9 +63,8 @@ export default function Services() {
 
                   {/* ✅ الصورة (هي اللي بتنقلب يمين/شمال) */}
                   <div
-                    className={`relative min-h-[220px] md:min-h-[320px] order-2 ${
-                      reversed ? "md:order-1" : "md:order-2"
-                    }`}
+className={`relative min-h-[220px] md:min-h-[320px] order-1 ${reversed ? "md:order-1" : "md:order-2"}`}
+
                   >
                     <Image
                       src={encodeURI(it.img)}

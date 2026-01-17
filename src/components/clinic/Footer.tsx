@@ -1,3 +1,6 @@
+"use client";
+
+import Reveal from "@/components/ui/Reveal";
 import { clinicInfo } from "./data";
 
 function IconFacebook() {
@@ -50,24 +53,111 @@ export default function Footer() {
 
   return (
     <footer dir="rtl" className="relative bg-[#0f121e] text-white">
-      {/* لمعة/تدرج خفيف للفخامة */}
       <div className="pointer-events-none absolute inset-0 opacity-60 bg-[radial-gradient(900px_circle_at_20%_10%,rgba(177,149,102,0.18),transparent_55%),radial-gradient(800px_circle_at_80%_30%,rgba(255,255,255,0.06),transparent_60%)]" />
-
-      {/* خط ذهبي علوي */}
       <div className="relative h-[2px] w-full bg-gradient-to-l from-transparent via-[#b19566] to-transparent opacity-80" />
 
       <div className="relative mx-auto max-w-6xl px-4 py-12">
+        {/* الأعمدة */}
         <div className="grid gap-10 md:grid-cols-3">
-          {/* عمود 1: اسم + وصف + سوشال */}
-          <div>
-            <div className="text-2xl font-extrabold text-[#b19566]">
-              {clinicInfo.name}
+          <Reveal direction="left">
+            <div>
+              <div className="text-2xl font-extrabold text-[#b19566]">
+                {clinicInfo.name}
+              </div>
+              <div className="mt-2 text-sm text-white/70">{clinicInfo.tagline}</div>
+              <div className="mt-6 text-xs text-white/55">
+                عناية متكاملة بتقنيات حديثة — حجز سريع عبر واتساب.
+              </div>
             </div>
-            <div className="mt-2 text-sm text-white/70">
-              {clinicInfo.tagline}
-            </div>
+          </Reveal>
 
-            <div className="mt-5 flex items-center gap-2">
+          <Reveal direction="up" delayMs={80}>
+            <div>
+              <div className="text-lg font-extrabold text-white">روابط</div>
+              <div className="mt-4 space-y-3 text-sm">
+                {[
+                  { label: "الخدمات", href: "#services" },
+                  { label: "الأطباء", href: "#doctors" },
+                  { label: "آراء الناس", href: "#reviews" },
+                  { label: "حجز موعد", href: "#booking" },
+                  { label: "تواصل", href: "#contact" },
+                ].map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10 hover:border-white/20"
+                  >
+                    <span className="text-white/85 group-hover:text-white">{l.label}</span>
+                    <span className="text-[#b19566]">›</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal direction="right" delayMs={120}>
+            <div>
+              <div className="text-lg font-extrabold text-white">تواصل</div>
+
+              <div className="mt-4 space-y-3">
+                <a
+                  href={telUrl}
+                  className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10 hover:border-white/20"
+                >
+                  <span className="text-[#b19566]">
+                    <IconPhone />
+                  </span>
+                  <div>
+                    <div className="text-sm font-bold text-white/90">اتصال</div>
+                    <div className="text-xs text-white/65">{clinicInfo.phoneDisplay}</div>
+                  </div>
+                </a>
+
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 transition hover:bg-emerald-400/15 hover:border-emerald-400/30"
+                >
+                  <span className="text-emerald-300">
+                    <IconWhatsApp />
+                  </span>
+                  <div>
+                    <div className="text-sm font-bold text-white/90">واتساب</div>
+                    <div className="text-xs text-white/65">حجز واستفسار سريع</div>
+                  </div>
+                </a>
+
+                <a
+                  href={clinicInfo.googleMapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10 hover:border-white/20"
+                >
+                  <span className="text-[#b19566]">
+                    <IconPin />
+                  </span>
+                  <div>
+                    <div className="text-sm font-bold text-white/90">الموقع</div>
+                    <div className="text-xs text-white/65">افتح الخرائط للوصول السريع</div>
+                  </div>
+                </a>
+              </div>
+
+              <div className="mt-6 rounded-xl border border-white/10 bg-white/5 p-4">
+                <div className="text-sm font-extrabold text-white/90">ساعات الدوام</div>
+                <div className="mt-2 text-xs text-white/65 leading-relaxed">
+                  السبت - الخميس: 8:00 ص — 10:00 م
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* الشريط السفلي */}
+        <Reveal direction="up" delayMs={140}>
+          <div className="mt-10 border-t border-white/10 pt-6 flex flex-col gap-4">
+            <div className="flex items-center justify-center gap-2">
               <a
                 href={clinicInfo.facebookUrl}
                 target="_blank"
@@ -105,107 +195,20 @@ export default function Footer() {
               </a>
             </div>
 
-            <div className="mt-6 text-xs text-white/55">
-              عناية متكاملة بتقنيات حديثة — حجز سريع عبر واتساب.
-            </div>
-          </div>
-
-          {/* عمود 2: روابط */}
-          <div>
-            <div className="text-lg font-extrabold text-white">روابط</div>
-            <div className="mt-4 space-y-3 text-sm">
-              {[
-                { label: "الخدمات", href: "#services" },
-                { label: "الأطباء", href: "#doctors" },
-                { label: "آراء الناس", href: "#reviews" },
-                { label: "حجز موعد", href: "#booking" },
-                { label: "تواصل", href: "#contact" },
-              ].map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10 hover:border-white/20"
-                >
-                  <span className="text-white/85 group-hover:text-white">{l.label}</span>
-                  <span className="text-[#b19566]">›</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* عمود 3: تواصل */}
-          <div>
-            <div className="text-lg font-extrabold text-white">تواصل</div>
-
-            <div className="mt-4 space-y-3">
-              <a
-                href={telUrl}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10 hover:border-white/20"
-              >
-                <span className="text-[#b19566]">
-                  <IconPhone />
-                </span>
-                <div>
-                  <div className="text-sm font-bold text-white/90">اتصال</div>
-                  <div className="text-xs text-white/65">{clinicInfo.phoneDisplay}</div>
-                </div>
-              </a>
-
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 transition hover:bg-emerald-400/15 hover:border-emerald-400/30"
-              >
-                <span className="text-emerald-300">
-                  <IconWhatsApp />
-                </span>
-                <div>
-                  <div className="text-sm font-bold text-white/90">واتساب</div>
-                  <div className="text-xs text-white/65">حجز واستفسار سريع</div>
-                </div>
-              </a>
-
-              <a
-                href={clinicInfo.googleMapsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:bg-white/10 hover:border-white/20"
-              >
-                <span className="text-[#b19566]">
-                  <IconPin />
-                </span>
-                <div>
-                  <div className="text-sm font-bold text-white/90">الموقع</div>
-                  <div className="text-xs text-white/65">افتح الخرائط للوصول السريع</div>
-                </div>
-              </a>
-            </div>
-
-            {/* ساعات دوام (اختياري) */}
-            <div className="mt-6 rounded-xl border border-white/10 bg-white/5 p-4">
-              <div className="text-sm font-extrabold text-white/90">ساعات الدوام</div>
-              <div className="mt-2 text-xs text-white/65 leading-relaxed">
-                السبت - الخميس: 8:00 ص — 10:00 م
-           
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div className="text-xs text-white/60 text-center md:text-right">
+                © {year} {clinicInfo.name} — جميع الحقوق محفوظة
               </div>
+
+              <a
+                href="#top"
+                className="text-xs text-white/70 hover:text-white transition underline underline-offset-4 decoration-white/20 hover:decoration-white/40 text-center md:text-left"
+              >
+                رجوع للأعلى
+              </a>
             </div>
           </div>
-        </div>
-
-        {/* شريط سفلي */}
-        <div className="mt-10 border-t border-white/10 pt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="text-xs text-white/60">
-            © {year} {clinicInfo.name} — جميع الحقوق محفوظة
-          </div>
-
-          <a
-            href="#top"
-            className="text-xs text-white/70 hover:text-white transition underline underline-offset-4 decoration-white/20 hover:decoration-white/40"
-          >
-            رجوع للأعلى
-          </a>
-        </div>
+        </Reveal>
       </div>
     </footer>
   );

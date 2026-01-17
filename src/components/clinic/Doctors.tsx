@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Reveal from "@/components/ui/Reveal";
 
 type Doctor = {
   id: string;
@@ -167,134 +168,151 @@ export default function Doctors() {
   return (
     <section id="doctors" className="w-full bg-[#f1f3fa]">
       <div className="px-4 pt-12">
-        <h2 className="section-title text-2xl md:text-3xl text-center">أطباؤنا</h2>
-        <p className="section-subtitle mt-2 text-center">
-          فريق متخصص بخبرة عالية — اضغط على اسم الطبيب لعرض نبذة.
-        </p>
+        {/* العنوان من فوق لتحت */}
+        <Reveal direction="down">
+          <h2 className="section-title text-2xl md:text-3xl text-center">
+            أطباؤنا
+          </h2>
+        </Reveal>
+
+        {/* الوصف من تحت لفوق */}
+        <Reveal direction="up" delayMs={80}>
+          <p className="section-subtitle mt-2 text-center">
+            فريق متخصص بخبرة عالية — اضغط على اسم الطبيب لعرض نبذة.
+          </p>
+        </Reveal>
       </div>
 
-      {/* الحاوية: Scroll + Drag + Auto */}
-      <div
-        dir="ltr"
-        ref={marqueeRef}
-        className={`mt-8 doctors-marquee ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
-        style={{
-          overflowX: "auto",
-          overflowY: "hidden",
-          WebkitOverflowScrolling: "touch",
-          touchAction: "pan-x",
-        }}
-        onMouseEnter={() => (pauseRef.current = true)}
-        onMouseLeave={() => (pauseRef.current = false)}
-        onPointerDown={(e) => {
-          const el = marqueeRef.current;
-          if (!el) return;
-
-          isDraggingRef.current = true;
-          setDragging(true);
-
-          movedRef.current = false; // مهم جدًا
-          pauseRef.current = true;
-
-          startXRef.current = e.clientX;
-          startScrollLeftRef.current = el.scrollLeft;
-
-          (e.currentTarget as HTMLDivElement).setPointerCapture?.(e.pointerId);
-        }}
-        onPointerMove={(e) => {
-          const el = marqueeRef.current;
-          if (!el || !isDraggingRef.current) return;
-
-          const dx = e.clientX - startXRef.current;
-          if (Math.abs(dx) > 6) movedRef.current = true;
-
-          const half = el.scrollWidth / 2 || 1;
-
-          let next = startScrollLeftRef.current - dx;
-
-          // لف لا نهائي حتى أثناء السحب
-          next = ((next % half) + half) % half;
-          el.scrollLeft = next;
-        }}
-        onPointerUp={() => {
-          isDraggingRef.current = false;
-          setDragging(false);
-          pauseRef.current = false;
-
-          // لو كان في سحب، خلّي منع الكليك لحظيًا ثم رجّعه
-          if (movedRef.current) {
-            setTimeout(() => {
-              movedRef.current = false;
-            }, 80);
-          }
-        }}
-        onPointerCancel={() => {
-          isDraggingRef.current = false;
-          setDragging(false);
-          pauseRef.current = false;
-
-          if (movedRef.current) {
-            setTimeout(() => {
-              movedRef.current = false;
-            }, 80);
-          }
-        }}
-      >
+      {/* السلايدر يدخل من اليمين */}
+      <Reveal direction="right" delayMs={120}>
         <div
-          className="doctors-track"
+          dir="ltr"
+          ref={marqueeRef}
+          className={`mt-8 doctors-marquee ${
+            dragging ? "cursor-grabbing" : "cursor-grab"
+          }`}
           style={{
-            display: "flex",
-            flexWrap: "nowrap",
-            gap: "20px",
-            width: "max-content",
-            padding: "24px",
-            animation: "none", // مهم: يعطّل أي CSS animation قديم
-            transform: "none",
+            overflowX: "auto",
+            overflowY: "hidden",
+            WebkitOverflowScrolling: "touch",
+            touchAction: "pan-x",
+          }}
+          onMouseEnter={() => (pauseRef.current = true)}
+          onMouseLeave={() => (pauseRef.current = false)}
+          onPointerDown={(e) => {
+            const el = marqueeRef.current;
+            if (!el) return;
+
+            isDraggingRef.current = true;
+            setDragging(true);
+
+            movedRef.current = false; // مهم جدًا
+            pauseRef.current = true;
+
+            startXRef.current = e.clientX;
+            startScrollLeftRef.current = el.scrollLeft;
+
+            (e.currentTarget as HTMLDivElement).setPointerCapture?.(e.pointerId);
+          }}
+          onPointerMove={(e) => {
+            const el = marqueeRef.current;
+            if (!el || !isDraggingRef.current) return;
+
+            const dx = e.clientX - startXRef.current;
+            if (Math.abs(dx) > 6) movedRef.current = true;
+
+            const half = el.scrollWidth / 2 || 1;
+
+            let next = startScrollLeftRef.current - dx;
+
+            // لف لا نهائي حتى أثناء السحب
+            next = ((next % half) + half) % half;
+            el.scrollLeft = next;
+          }}
+          onPointerUp={() => {
+            isDraggingRef.current = false;
+            setDragging(false);
+            pauseRef.current = false;
+
+            if (movedRef.current) {
+              setTimeout(() => {
+                movedRef.current = false;
+              }, 80);
+            }
+          }}
+          onPointerCancel={() => {
+            isDraggingRef.current = false;
+            setDragging(false);
+            pauseRef.current = false;
+
+            if (movedRef.current) {
+              setTimeout(() => {
+                movedRef.current = false;
+              }, 80);
+            }
           }}
         >
-          {loop.map((d, i) => (
-            <div key={`${d.id}-${i}`} className="shrink-0 w-[320px]">
-              <div className="bg-white rounded-md overflow-hidden border border-black/5 shadow-[0_0_45px_rgba(0,0,0,0.08)] transition hover:-translate-y-1.5 hover:shadow-[0_0_45px_rgba(0,0,0,0.12)]">
-                <div className="relative h-[380px] w-full bg-[#f1f3fa]">
-         <Image
-  src={d.img}
-  alt={d.name}
-  fill
-  draggable={false}
-  className="object-cover pointer-events-none select-none"
-  sizes="320px"
-/>
+          <div
+            className="doctors-track"
+            style={{
+              display: "flex",
+              flexWrap: "nowrap",
+              gap: "20px",
+              width: "max-content",
+              padding: "24px",
+              animation: "none",
+              transform: "none",
+            }}
+          >
+            {loop.map((d, i) => (
+              <div key={`${d.id}-${i}`} className="shrink-0 w-[320px]">
+                <div className="bg-white rounded-md overflow-hidden border border-black/5 shadow-[0_0_45px_rgba(0,0,0,0.08)] transition hover:-translate-y-1.5 hover:shadow-[0_0_45px_rgba(0,0,0,0.12)]">
+                  <div className="relative h-[380px] w-full bg-[#f1f3fa]">
+                    <Image
+                      src={d.img}
+                      alt={d.name}
+                      fill
+                      draggable={false}
+                      className="object-cover pointer-events-none select-none"
+                      sizes="320px"
+                    />
+                  </div>
 
-                </div>
+                  <div dir="rtl" className="text-center px-4 py-3">
+                    <button
+                      onPointerDown={(e) => {
+                        e.stopPropagation();
+                        movedRef.current = false;
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelected(d);
+                      }}
+                      className="w-full font-extrabold text-[#1c2035] hover:text-[#b19566] transition"
+                    >
+                      {d.name}
+                    </button>
 
-                <div dir="rtl" className="text-center px-4 py-3">
-            <button
-  onPointerDown={(e) => {
-    e.stopPropagation();        // مهم: يمنع حاوية السحب من التقاط اللمسة
-    movedRef.current = false;   // احتياط
-  }}
-  onClick={(e) => {
-    e.stopPropagation();        // مهم
-    setSelected(d);             // افتح المودال
-  }}
-  className="w-full font-extrabold text-[#1c2035] hover:text-[#b19566] transition"
->
-  {d.name}
-</button>
-
-                  <div className="mt-1 text-[12px] font-bold text-[#b19566]">
-                    {d.specialty}
+                    <div className="mt-1 text-[12px] font-bold text-[#b19566]">
+                      {d.specialty}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </Reveal>
 
-      <div className="px-4 pb-10 text-xs text-[#1c2035]/60 text-center" dir="rtl">
-        اسحب يمين/يسار للتنقل بين الأطباء، واضغط على اسم الطبيب لعرض النبذة.
-      </div>
+      {/* النص السفلي يطلع من تحت */}
+      <Reveal direction="up" delayMs={120}>
+        <div
+          className="px-4 pb-10 text-xs text-[#1c2035]/60 text-center"
+          dir="rtl"
+        >
+          اسحب يمين/يسار للتنقل بين الأطباء، واضغط على اسم الطبيب لعرض النبذة.
+        </div>
+      </Reveal>
 
       <Modal open={!!selected} doctor={selected} onClose={() => setSelected(null)} />
     </section>
